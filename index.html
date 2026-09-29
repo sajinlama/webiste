@@ -99,26 +99,10 @@ label{font-family:'Manrope',sans-serif}
 /* Shared intro-paragraph style: one size for every section subtitle */
 .lead{font-family:'Manrope',sans-serif;font-size:1.0625rem;line-height:1.65;color:#4A5550;font-weight:400}
 
-/* ---- How it works: structure cards (static, one highlight moves along) ---- */
-.op-live{width:8px;height:8px;border-radius:9999px;background:#53645A;display:inline-block}
-.op-grid{display:grid;gap:1.25rem;grid-template-columns:repeat(4,minmax(0,1fr))}
-@media(max-width:1023px){.op-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.op-arrow{display:none!important}}
-@media(max-width:639px){.op-grid{grid-template-columns:1fr}}
-.op-cell{position:relative;display:flex;cursor:pointer;outline:none}
-.op-card{flex:1;display:flex;flex-direction:column;background:#fff;border:1px solid #E1E6E2;border-radius:1.25rem;overflow:hidden;transition:border-color .4s ease,box-shadow .4s ease}
-.op-cell:focus-visible .op-card{border-color:#53645A}
-.op-cell.active .op-card{border-color:#53645A;box-shadow:0 12px 28px -14px rgba(22,28,25,.18)}
-.op-head{padding:1.5rem 1.5rem 0}
-.op-stage{position:relative;margin-top:1.5rem;height:200px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#EFF3F0 100%)}
-.op-ui{position:absolute;left:1.25rem;right:1.25rem;bottom:1.25rem;background:#fff;border:1px solid #E1E6E2;border-radius:1rem;padding:.9rem 1rem}
-.op-ico{width:1.6rem;height:1.6rem;border-radius:9999px;background:#EFF3F0;color:#53645A;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.op-line{height:6px;border-radius:9999px;background:#E1E6E2}
-.op-chip{display:inline-flex;align-items:center;gap:.4rem;font-size:11px;font-weight:700;padding:.3rem .7rem;border-radius:9999px;background:#53645A;color:#fff}
-.op-row{display:flex;align-items:center;gap:.6rem;font-size:13px;font-weight:600;color:#161C19}
-.op-check{width:1.15rem;height:1.15rem;border-radius:9999px;background:#53645A;color:#fff;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.op-avatar{width:1.7rem;height:1.7rem;border-radius:9999px;background:#E3EAE5;border:2px solid #fff;color:#43524A;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
-.op-arrow{position:absolute;top:2.6rem;right:-1.45rem;z-index:2;width:1.75rem;height:1.75rem;border-radius:9999px;background:#fff;border:1px solid #E1E6E2;color:#AAB4AE;display:flex;align-items:center;justify-content:center;transition:background-color .4s,color .4s,border-color .4s}
-.op-cell.active .op-arrow{background:#53645A;border-color:#53645A;color:#fff}
+
+/* Shared arrow link */
+.link-arrow{display:inline-flex;align-items:center;gap:.5rem;font-family:'Manrope',sans-serif;font-size:.875rem;font-weight:700;color:#161C19}
+.link-arrow:hover{text-decoration:underline}
 </style>
 </head>
 <body class="selection:bg-pine selection:text-white font-sans">
@@ -296,149 +280,109 @@ label{font-family:'Manrope',sans-serif}
       </div>
     </div>
 
-<a href="https://www.vianepa.de"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="group font-sans inline-flex items-center gap-2 text-sm font-bold text-ink">
-  Learn about ViaNepa
-  <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
-</a>  </div>
+<a href="https://www.vianepa.de" target="_blank" rel="noopener noreferrer" class="link-arrow">Learn about ViaNepa <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>  </div>
 </section>
 
-<!-- 3. HOW IT WORKS (UPDATED) -->
+<style>
+  .hw-steps{display:grid;grid-template-columns:1fr;list-style:none;margin:0;padding:0}
+  .hw-step{position:relative;padding:0 0 2.5rem 3.5rem;min-height:2.5rem}
+  .hw-step:last-child{padding-bottom:0}
+  .hw-step::before{content:"";position:absolute;left:1.25rem;top:2.75rem;bottom:.25rem;width:1px;background:#E1E6E2}
+  .hw-step:last-child::before{display:none}
+  .hw-num{position:absolute;left:0;top:0;width:2.5rem;height:2.5rem;border-radius:9999px;background:#fff;border:1px solid #E1E6E2;color:#53645A;
+    display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;font-family:'Manrope',sans-serif}
+  .hw-step.is-end .hw-num{background:#EFF3F0}
+  @media(min-width:1024px){
+    .hw-steps{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:2rem}
+    .hw-step{padding:3.5rem 0 0 0;min-height:0}
+    .hw-step::before{left:3rem;right:-1.75rem;top:1.25rem;bottom:auto;width:auto;height:1px}
+  }
+</style>
+
+<!-- 3. HOW IT WORKS: the client journey -->
 <section id="how-it-works" class="py-24 border-b border-line px-6 bg-white">
-  <div class="max-w-6xl mx-auto space-y-16">
+  <div class="max-w-6xl mx-auto space-y-14">
     <div class="max-w-2xl space-y-2">
       <div class="eyebrow mb-1"><span class="eyebrow-dot"></span><span class="card-tag">How it Works</span></div>
-      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">A simple way to build <span class="serif font-normal font-serif">your team in Kathmandu.</span></h2>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">From your brief to a working team <span class="serif font-normal font-serif">in Kathmandu.</span></h2>
     </div>
 
-    <!-- Steps: 4 main + small 5th -->
-    <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-10">
-      <div class="hidden lg:block absolute top-5 left-[10%] right-[10%] h-px bg-line"></div>
-
-      <div class="relative space-y-4">
-        <span class="relative z-10 w-10 h-10 rounded-full bg-white border border-line flex items-center justify-center font-sans text-sm font-bold text-pine">01</span>
-        <h3 class="card-title">Tell us what you need</h3>
-        <p class="card-body">We understand your roles, skills and working requirements.</p>
-      </div>
-      <div class="relative space-y-4">
-        <span class="relative z-10 w-10 h-10 rounded-full bg-white border border-line flex items-center justify-center font-sans text-sm font-bold text-pine">02</span>
-        <h3 class="card-title">We build the right team</h3>
-        <p class="card-body">We recruit and select people who fit your requirements.</p>
-      </div>
-      <div class="relative space-y-4">
-        <span class="relative z-10 w-10 h-10 rounded-full bg-white border border-line flex items-center justify-center font-sans text-sm font-bold text-pine">03</span>
-        <h3 class="card-title">Your team works from Kathmandu</h3>
-        <p class="card-body">Your employees work from the Deutschelink office and collaborate directly with your company.</p>
-      </div>
-      <div class="relative space-y-4">
-        <span class="relative z-10 w-10 h-10 rounded-full bg-white border border-line flex items-center justify-center font-sans text-sm font-bold text-pine">04</span>
-        <h3 class="card-title">We manage the local side</h3>
-        <p class="card-body">We take care of the workplace, local employee matters and day-to-day support.</p>
-      </div>
-      <!-- Small 5th step: lighter treatment -->
-      <div class="relative space-y-4 sm:col-span-2 lg:col-span-1">
-        <span class="relative z-10 w-10 h-10 rounded-full bg-pine-tint border border-line flex items-center justify-center font-sans text-sm font-bold text-pine">05</span>
-        <h3 class="card-title"> Our Commercial Structure</h3>
-        <p class="card-body">For clients working through ViaNepa, the commercial and contracting relationship is handled through our Germany-based partner</p>
-      </div>
-    </div>
-
-    <!-- Operational & commercial structure -->
-    <div class="space-y-6">
-  <div class="flex items-center justify-between gap-4">
-    <span class="card-tag">Operational &amp; Commercial Structure</span>
-    
+    <ol class="hw-steps">
+      <li class="hw-step">
+        <span class="hw-num">01</span>
+        <h3 class="card-title">You share your requirements</h3>
+        <p class="card-body mt-2">Roles, skills and how you like to work.</p>
+      </li>
+      <li class="hw-step">
+        <span class="hw-num">02</span>
+        <h3 class="card-title">We recruit the team</h3>
+        <p class="card-body mt-2">People selected to fit your brief, not a generic pool.</p>
+      </li>
+      <li class="hw-step">
+        <span class="hw-num">03</span>
+        <h3 class="card-title">They start working with you</h3>
+        <p class="card-body mt-2">From our Kathmandu office, in your tools and your rhythm.</p>
+      </li>
+      <li class="hw-step is-end">
+        <span class="hw-num">04</span>
+        <h3 class="card-title">We look after the local side</h3>
+        <p class="card-body mt-2">Workplace, employee matters and day-to-day support.</p>
+      </li>
+    </ol>
   </div>
+</section>
 
-  <div id="op-grid" class="op-grid">
-
-    <!-- 01 Client -->
-    <div class="op-cell active" data-i="0" tabindex="0">
-      <article class="op-card">
-        <div class="op-head">
-          <h3 class="card-title">Client</h3>
-          <p class="card-body mt-2">Shares the project, roles and working requirements.</p>
-        </div>
-        <div class="op-stage">
-          <div class="op-ui">
-            <div class="flex items-center gap-2">
-              <span class="op-ico"><i data-lucide="file-text" class="w-3.5 h-3.5"></i></span>
-              <span class="text-[13px] font-semibold text-ink">Project brief</span>
-            </div>
-            <div class="op-line mt-3" style="width:92%"></div>
-            <div class="op-line mt-2" style="width:74%"></div>
-            <div class="op-line mt-2" style="width:58%"></div>
-            <span class="op-chip mt-3">Brief sent</span>
-          </div>
-        </div>
-      </article>
-      <span class="op-arrow"><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+<!-- 3B. OPERATIONAL & COMMERCIAL STRUCTURE: who does what -->
+<section id="structure" class="py-24 border-b border-line px-6 bg-canvas">
+  <div class="max-w-6xl mx-auto space-y-12">
+    <div class="max-w-2xl space-y-2">
+      <div class="eyebrow mb-1"><span class="eyebrow-dot"></span><span class="card-tag">Operational &amp; Commercial Structure</span></div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Who is responsible <span class="serif font-normal font-serif">for what.</span></h2>
+      <p class="lead">One contract in Germany, one workplace in Kathmandu, one team that works directly with you.</p>
     </div>
 
-    <!-- 02 ViaNepa -->
-    <div class="op-cell" data-i="1" tabindex="0">
-      <article class="op-card">
-        <div class="op-head">
-          <h3 class="card-title">ViaNepa</h3>
-          <p class="card-body mt-2">Germany-based contracting, invoicing and payments.</p>
+    <div class="border border-line rounded-2xl overflow-hidden bg-white divide-y divide-line">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 p-6 sm:p-8">
+        <div class="lg:col-span-3"><span class="card-tag">Your company</span><h3 class="card-title mt-1">Client</h3></div>
+        <p class="card-body lg:col-span-5">Sets the goals and priorities and directs the work day to day.</p>
+        <div class="lg:col-span-4 flex flex-wrap content-start gap-2">
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Requirements</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Priorities</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Daily direction</span>
         </div>
-        <div class="op-stage">
-          <div class="op-ui space-y-2.5">
-            <div class="op-row"><span class="op-check"><i data-lucide="check" class="w-3 h-3"></i></span>Contract signed</div>
-            <div class="op-row"><span class="op-check"><i data-lucide="check" class="w-3 h-3"></i></span>Invoice issued</div>
-            <div class="op-row"><span class="op-check"><i data-lucide="check" class="w-3 h-3"></i></span>Payment received</div>
-          </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 p-6 sm:p-8">
+        <div class="lg:col-span-3"><span class="card-tag">Germany / Commercial</span><h3 class="card-title mt-1">ViaNepa</h3></div>
+        <p class="card-body lg:col-span-5">Our Germany-based partner for the commercial and contracting relationship.</p>
+        <div class="lg:col-span-4 flex flex-wrap content-start gap-2">
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Contracting</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Invoicing</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Payments</span>
         </div>
-      </article>
-      <span class="op-arrow"><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 p-6 sm:p-8 bg-pine-tint">
+        <div class="lg:col-span-3"><span class="card-tag">Kathmandu / Operations</span><h3 class="card-title mt-1">Deutschelink</h3></div>
+        <p class="card-body lg:col-span-5">Recruits the people and runs the workplace and local operations.</p>
+        <div class="lg:col-span-4 flex flex-wrap content-start gap-2">
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-white">Recruitment</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-white">Workplace</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-white">Local employee matters</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-white">Day-to-day support</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 p-6 sm:p-8">
+        <div class="lg:col-span-3"><span class="card-tag">Delivery</span><h3 class="card-title mt-1">Your team</h3></div>
+        <p class="card-body lg:col-span-5">Works directly with the client, using the client's tools and processes.</p>
+        <div class="lg:col-span-4 flex flex-wrap content-start gap-2">
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Your tools</span>
+          <span class="card-tag !text-[11px] px-2.5 py-1 rounded-md bg-pine-tint">Your processes</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 px-6 sm:px-8 py-4 bg-canvas">
+        <i data-lucide="link-2" class="w-4 h-4 text-pine shrink-0"></i>
+        <p class="card-body">Client and team collaborate directly. No intermediary in the daily work.</p>
+      </div>
     </div>
-
-    <!-- 03 Deutschelink -->
-    <div class="op-cell" data-i="2" tabindex="0">
-      <article class="op-card">
-        <div class="op-head">
-          <h3 class="card-title">Deutschelink</h3>
-          <p class="card-body mt-2">Recruits the team and runs the workplace in Kathmandu.</p>
-        </div>
-        <div class="op-stage">
-          <div class="op-ui">
-            <div class="flex items-center">
-              <span class="op-avatar">A</span><span class="op-avatar -ml-2">S</span><span class="op-avatar -ml-2">R</span>
-              <span class="ml-3 text-[13px] font-semibold text-ink">Team recruited</span>
-            </div>
-            <div class="op-row mt-3"><span class="op-check"><i data-lucide="check" class="w-3 h-3"></i></span>Workplace ready</div>
-            <div class="op-row mt-2.5"><span class="op-check"><i data-lucide="check" class="w-3 h-3"></i></span>Onboarded</div>
-          </div>
-        </div>
-      </article>
-      <span class="op-arrow"><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
-    </div>
-
-    <!-- 04 Team -->
-    <div class="op-cell" data-i="3" tabindex="0">
-      <article class="op-card">
-        <div class="op-head">
-          <h3 class="card-title">Your team</h3>
-          <p class="card-body mt-2">Works directly with your company, in your tools.</p>
-        </div>
-        <div class="op-stage">
-          <div class="op-ui">
-            <div class="flex items-center justify-between">
-              <span class="flex items-center gap-2 text-[13px] font-semibold text-ink"><span class="op-ico"><i data-lucide="video" class="w-3.5 h-3.5"></i></span>Daily standup</span>
-              <span class="text-[11px] font-semibold text-body">10:00 CET</span>
-            </div>
-            <div class="op-line mt-3" style="width:86%"></div>
-            <div class="op-line mt-2 ml-auto" style="width:64%;background:#CBD8D0"></div>
-            <span class="op-chip mt-3">Working in your tools</span>
-          </div>
-        </div>
-      </article>
-    </div>
-
-  </div>
-</div>
   </div>
 </section>
 
@@ -499,7 +443,7 @@ label{font-family:'Manrope',sans-serif}
       <p class="lead">We provide the people and the local environment they need to do their work well.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="card !rounded-3xl space-y-6">
+      <div class="card space-y-6">
         <div class="rounded-2xl overflow-hidden aspect-[16/10] bg-zinc-100 border border-line">
           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Rujal and Sanjiv working together" class="w-full h-full object-cover">
         </div>
@@ -509,7 +453,7 @@ label{font-family:'Manrope',sans-serif}
           <p class="card-body">Rujal and Sanjiv working together on the same international project from our Kathmandu office.</p>
         </div>
       </div>
-      <div class="card !rounded-3xl space-y-6">
+      <div class="card space-y-6">
         <div class="rounded-2xl overflow-hidden aspect-[16/10] bg-zinc-100 border border-line">
           <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80" alt="Employees in meetings and video calls" class="w-full h-full object-cover">
         </div>
@@ -532,7 +476,7 @@ label{font-family:'Manrope',sans-serif}
         <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Build the team <span class="serif font-normal font-serif">you actually need.</span></h2>
         <p class="lead">Our teams can support international companies across:</p>
       </div>
-      <a href="#book-consultant" class="font-sans inline-flex items-center gap-2 text-sm font-bold text-ink hover:underline">Explore our capabilities &rarr;</a>
+      <a href="#book-consultant" class="link-arrow">Explore our capabilities <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
     </div>
     <div class="border border-line rounded-2xl overflow-hidden bg-white divide-y divide-line">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 p-6 sm:p-8">
@@ -621,7 +565,7 @@ label{font-family:'Manrope',sans-serif}
         <div class="eyebrow"><span class="eyebrow-dot"></span><span class="card-tag">About Deutschelink</span></div>
         <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Who <span class="serif font-normal font-serif">we are.</span></h2>
         <p class="lead">Deutschelink was created to connect international companies with skilled professionals in Kathmandu — while providing the local workplace and management needed to make that relationship work.</p>
-        <p class="lead">Deutschelink is managed locally in Kathmandu, with international client relationships managed together with our Berlin-based partner.</p>
+        <p class="lead">Deutschelink is managed locally in Kathmandu, with international client relationships managed together with our Germany-based partner.</p>
       </div>
       <div class="lg:col-span-5">
         <div class="card space-y-4">
@@ -643,7 +587,7 @@ label{font-family:'Manrope',sans-serif}
       <p class="lead">Have a specific requirement or want to understand how Deutschelink works? Book a video call with our leadership in Germany or Nepal.</p>
     </div>
 
-    <div class="card !rounded-3xl p-6 sm:p-10">
+    <div class="card p-6 sm:p-10">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <div class="lg:col-span-7 space-y-6 font-sans">
           <div>
@@ -710,7 +654,7 @@ label{font-family:'Manrope',sans-serif}
             <span class="card-tag">Consultation Overview</span>
             <div id="booking-director-label" class="text-xs font-sans font-semibold text-body mt-1">Germany Hub (Berlin / CET)</div>
             <div id="booking-summary-slot" class="card-title mt-1">Oct 7, 2026 at 10:00 CET</div>
-            <div class="text-[11px] font-sans text-body mt-0.5">25 Min &bull; Google Meet Video Conference</div>
+            <div class="text-[11px] font-sans text-body mt-0.5">15 Min &bull; Google Meet Video Conference</div>
           </div>
           <form onsubmit="handleConsultantBooking(event)" class="space-y-3.5 font-sans">
             <div><label class="block text-[11px] uppercase text-body mb-1 font-semibold tracking-wider">Your Full Name</label>
@@ -747,7 +691,7 @@ label{font-family:'Manrope',sans-serif}
           </div>
         </div>
         <div class="pt-2">
-          <a href="#book-consultant" class="font-sans inline-flex items-center gap-2 text-sm font-bold text-ink hover:underline"><span>Inquire about campus visit passes</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+          <a href="#book-consultant" class="link-arrow">Inquire about campus visit passes <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
         </div>
       </div>
       <div class="lg:col-span-7">
@@ -1046,7 +990,7 @@ function updateActiveNav() {
   const secs = document.querySelectorAll('main > section');
   let current = null;
   secs.forEach(sec => { if (sec.getBoundingClientRect().top <= window.innerHeight * 0.35) current = sec.id; });
-  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav === current));
+  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav === current || (current === 'structure' && a.dataset.nav === 'how-it-works')));
 }
 window.addEventListener('scroll', updateActiveNav, { passive: true });
 window.addEventListener('load', updateActiveNav);
@@ -1098,19 +1042,6 @@ document.querySelectorAll('.faq-toggle').forEach(btn => {
     if (!isOpen) { panel.classList.add('open'); icon.classList.add('open'); }
   });
 });
-
-/* 5. How it works: highlight moves through the four steps; click to jump */
-(function(){
-  const grid=document.getElementById('op-grid'); if(!grid) return;
-  const cells=[...grid.querySelectorAll('.op-cell')];
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cur=0, timer=null;
-  function set(n){cur=n;cells.forEach((c,k)=>c.classList.toggle('active',k===n));}
-  function start(){clearInterval(timer);if(!reduce)timer=setInterval(()=>set((cur+1)%cells.length),3500);}
-  cells.forEach((c,k)=>{c.addEventListener('click',()=>{set(k);start();});c.addEventListener('focus',()=>{set(k);start();});});
-  set(0);
-  new IntersectionObserver((en,ob)=>{en.forEach(x=>{if(x.isIntersecting){start();ob.disconnect();}});},{threshold:.3}).observe(grid);
-})();
 
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
